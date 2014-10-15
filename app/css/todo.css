@@ -1,0 +1,33 @@
+#filters {
+    background-color: grey;
+    text-align: center;
+    list-style-type:none;
+} 
+
+#filters a{
+	color: #EDEDED;
+}
+
+.selected{
+	font-weight: bold;
+}
+
+#header-strip{
+	border-style: solid;
+    border-color: #8d7d77;
+    background-color: #8d7d77;
+	height:15px;
+	widht:100%;
+	top:0;
+	right:0;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #EAE6C6;
+ }
+
+ .striked_text{
+ 	text-decoration:line-through;
+ 	color: grey;
+ }

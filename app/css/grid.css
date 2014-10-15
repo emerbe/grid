@@ -1,0 +1,10 @@
+.grid-header{
+	background-color: #95a5a6; 
+	font-weight: bold;
+}
+
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #EAE6C6;
+ }

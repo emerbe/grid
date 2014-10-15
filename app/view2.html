@@ -1,0 +1,19 @@
+<div class="container">
+
+	<personaldata></personaldata>
+	<a href ng-click="add=1" >Add review</a>    
+ 
+    <!-- form validates here using form name and .$valid and on submission we are going to addReview function with guitarID -->
+    <form class="reviewForm" name="reviewForm" novalidate ng-show="add===1" >
+        <div>
+            Review Points:
+            <!-- ng-option here is setting options, cool? -->
+            <select ng-model="simpleRouteController2.review" ng-options="point for point in [5,4,3,2,1]" required >                </select>
+            Email:
+            <input type="email" ng-model="simpleRouteController2.email" required>
+            <button ng-disabled="!reviewForm.$valid" ng-click="submit()" type="submit">Submit</button>
+        </div>
+        <textarea placeholder="Enter your experience with this guitar..."  ng-model="simpleRouteController2.body"></textarea>
+    </form><!-- END add new review -->
+</div>
+

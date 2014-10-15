@@ -1,0 +1,10 @@
+<div class="container" ng-controller="GridController">
+	<table style="width:100%"  class="table table-hover table-bordered table-striped">
+		<thead>
+			<td ng-repeat="column in columns" class="grid-header">{{column}}</td>
+		</thead>
+		<tr ng-repeat="row in data">
+			<td ng-repeat="element in row">{{element}}</td>
+		</tr>
+	</table> 
+</div>
