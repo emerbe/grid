@@ -2,6 +2,7 @@ var routeModule = angular.module('routeApp', [
   'ngRoute',
   'routeControllers'
 ]);
+
 routeModule.config(['$routeProvider',
   function($routeProvider) {
 	$routeProvider.when('/', {
@@ -15,3 +16,4 @@ routeModule.config(['$routeProvider',
 		redirectTo: '/'
 	});
 }]);
+
