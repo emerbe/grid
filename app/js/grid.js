@@ -1,4 +1,4 @@
-var routeControllers = angular.module('routeControllers', []);
+var routeControllers = angular.module('routeControllers', ['ui.bootstrap']);
 
 routeControllers.controller('GridController', ['$scope', '$http',
     function ($scope, $http) {
@@ -19,11 +19,16 @@ routeControllers.directive('grid', function () {
         scope: {
             title: "@",
             ngModel: '=',
-            data:'='
+            data:'=',
+            style:'@',
+            filterable:'='
         },
         controller: function($scope, $compile, $http) {
             // $scope is the appropriate scope for the directive
             $scope.reverseSort = false;
+            $scope.orderByField = '';
+            $scope.filters = {};
+            $scope.filtersShow ={};
             var columns = [];
             $scope.columns=columns;
             this.addChild = function(column) { // this refers to the controller
@@ -34,30 +39,38 @@ routeControllers.directive('grid', function () {
                 $scope.rows = filterByColumns(newValue, $scope.columns);
             });
 
+            $scope.$watch('filtersShow', function(newValue, oldValue) {
+                $.each(newValue, function(key,val){
+                    if(val == false)
+                        delete $scope.filters[key];
+                });
+            }, true);
+
             function filterByColumns(data, columns){
                 return Enumerable.From(data).Select(
                     function(x) {
-                        var row =[];
-                        var tmp={};
+                        var row={};
                         columns.forEach(function(element, index){
-                            tmp[element.value] = x.Value[element.value];
-
-                            //row.push(x.Value[element.value]);
+                            row[element.value] = x.Value[element.value];
                         });
-                        row.push(tmp);
-                        return tmp;
+                        return row;
                     }
                 ).ToArray();
             }
 
-
         },
         link: function($scope, $element){
-            $scope.isEnabled = true;
-            $scope.sort = function(columnIndex){
+            $scope.setOrderByField = function(sortField) {
+                $scope.reverseSort = !$scope.reverseSort;
+                $scope.orderByField = sortField;
+            }
 
-                $scope.rows =  Enumerable.From($scope.rows).OrderBy(columnIndex).ToArray();
-                console.log("sorting " + columnIndex);
+            $scope.getOrderValue = function(val) {
+                return val[$scope.orderByField];
+            }
+
+            $scope.enableFilter = function(columnValue, enable){
+                $scope.filtersShow[columnValue] = enable;
             }
         }
     };

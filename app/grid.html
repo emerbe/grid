@@ -1,19 +1,21 @@
 
-<div >
-    <table style="width:100%"  class="table table-hover table-bordered table-striped">
-        <thead>
-
-            <th ng-repeat="column in columns" class="grid-header" ng-click="sort(column.value)">
-                <a href="#" ng-click="orderByField='column.value'; reverseSort = !reverseSort">
-                    {{column.name}}
-                    <span ng-show="orderByField == 'firstName'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
-                </a>
-            </th>
-        </thead>
-        <tr ng-repeat="row in rows|orderBy:orderByField:reverseSort">
-            <td ng-repeat="column in row">{{column}}</td>
-        </tr>
-    </table>
-    <div class="tab-content" ng-transclude></div>
-</div>
+<table style={{style}} class="table table-hover table-bordered table-striped">
+    <thead>
+        <th ng-repeat="column in columns" class="grid-header">
+            <a href="#" ng-click="setOrderByField(column.value)">
+                {{column.name}}
+                <span style="position:absolute;"  ng-show="orderByField == column.value">
+                    <span ng-show="!reverseSort" class="glyphicon glyphicon-chevron-up"></span>
+                    <span ng-show="reverseSort"  class="glyphicon glyphicon-chevron-down"></span>
+                </span>
+            </a>
+            <span style="float:right; cursor: pointer;" ng-click="enableFilter(column.value, !filtersShow[column.value])"  ng-show="filterable" class="glyphicon glyphicon-filter"></span>
+            <input ng-show="filtersShow[column.value]" type="text" ng-model="filters[column.value]" style="width:100%" class="form-control">
+        </th>
+    </thead>
+    <tr ng-repeat="row in rows|orderBy:getOrderValue:reverseSort|filter:filters">
+        <td ng-repeat="column in columns">{{row[column.value]}}</td>
+    </tr>
+</table>
+<div class="tab-content" ng-transclude></div>
 

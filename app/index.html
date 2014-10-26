@@ -3,6 +3,8 @@
 <head>
 	<script src="../bower_components/angular/angular.js"></script>
 	<script src="../bower_components/angular-route/angular-route.js"></script>
+	<script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.2.js"></script>
 	<script src="js/app.js"></script>
     <script src="js/grid.js"></script>
     <script src="js/column.js"></script>
@@ -11,20 +13,19 @@
 	<script src="../bower_components/jquery/jquery.js"></script>
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
 	<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
    
 	<title>Welcome to AngularJS</title>
 </head>
 <body>
-	<div ng-controller="GridController">
+	<div ng-controller="GridController" class="center-div">
 
-        <grid data=scopeRows>
+        <grid data=scopeRows style="width:700px" filterable="true">
             <column name="Location" value="Location"></column>
             <column name="Name" value="name"></column>
             <column name="Salary" value="Salary"></column>
+			<column name="Employee ID" value="Employee ID"></column>
             <column name="Postion" value="Position"></column>
         </grid>
-
 
 	</div>
 
